@@ -1,4 +1,4 @@
-FROM quay.io/ukhomeofficedigital/docker-centos-openjdk8:0.1
+FROM quay.io/ukhomeofficedigital/docker-centos-openjdk8:latest
 MAINTAINER "Mark Olliver mark@keao.cloud"
 LABEL Version="0.1"
 LABEL Name="tomcat"
