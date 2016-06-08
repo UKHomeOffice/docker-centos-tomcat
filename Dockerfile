@@ -4,11 +4,18 @@ LABEL Version="0.1"
 LABEL Name="tomcat"
 LABEL Description="Apache Tomcat Container"
 
-ENV TOMCAT_MAJOR=8
-ENV TOMCAT_MINOR=8.0.35
-ENV OPENSSL_VERSION=1.0.2h
-ENV JAVA_MAJOR=${JAVA_MAJOR}
-ENV JAVA_MINOR=${JAVA_MINOR}
+
+ARG TOMCAT_MAJOR=8
+ARG TOMCAT_MINOR=8.0.35
+ARG OPENSSL_VERSION=1.0.2h
+ARG JAVA_MAJOR=1.8.0
+ARG JAVA_MINOR=91-0.b14
+
+ENV TOMCAT_MAJOR ${TOMCAT_MAJOR}
+ENV TOMCAT_MINOR ${TOMCAT_MINOR}
+ENV OPENSSL_VERSION ${OPENSSL_VERSION}
+ENV JAVA_MAJOR ${JAVA_MAJOR}
+ENV JAVA_MINOR ${JAVA_MINOR}
 
 RUN curl -#L http://www.mirrorservice.org/sites/ftp.apache.org/tomcat/tomcat-${TOMCAT_MAJOR}/v${TOMCAT_MINOR}/bin/apache-tomcat-${TOMCAT_MINOR}.tar.gz -o /tmp/apache-tomcat.tar.gz
 RUN curl -#L https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz -o /tmp/openssl.tar.gz
