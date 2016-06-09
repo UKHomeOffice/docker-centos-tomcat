@@ -34,10 +34,10 @@ build:
 	docker build -t $(NAME):$(VERSION) --rm=true .
 
 run:
-	docker run -d -v $PWD/ssl:/opt/tomcat/ssl -p 8080:8080 -p 8443:8443 --name ${NAME} $(NAME):$(VERSION)
+	docker run -d -v $(PWD)/ssl:/opt/tomcat/ssl -p 8080:8080 -p 8443:8443 --name ${NAME} $(NAME):$(VERSION)
 
 shell:
-	docker run -it -v $PWD/ssl:/opt/tomcat/ssl -p 8080:8080 -p 8443:8443 --entrypoint="/bin/bash" $(NAME):$(VERSION)
+	docker run -it -v $(PWD)/ssl:/opt/tomcat/ssl -p 8080:8080 -p 8443:8443 --entrypoint="/bin/bash" $(NAME):$(VERSION)
 
 tag_latest:
 	@echo

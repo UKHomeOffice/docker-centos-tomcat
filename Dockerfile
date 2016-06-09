@@ -44,6 +44,7 @@ WORKDIR /opt/tomcat
  
 RUN mkdir -p /opt/tomcat-native && \
     tar -zxf bin/tomcat-native.tar.gz -C /opt/tomcat-native --strip-components=1 && \
+    rm /opt/tomcat/bin/*tar.gz && \
     cd /opt/tomcat-native/native && \
     ./configure \
         --libdir=/usr/lib/ \
@@ -64,7 +65,8 @@ RUN set -e \
             exit 1 \
 	fi
 
-RUN yum remove -y apr-devel && \
+RUN yum remove -y apr-devel kernel-devel kernel-headers boost* rsync perl* && \
+    rpm --nodeps -e libXfont libXau libX11 libXi libX11-common libXext libXtst libXrender xorg-x11-font-utils xorg-x11-fonts-Type1 libxcb giflib && \
     yum groupremove -y "Development Tools" && \
     yum clean all
 
