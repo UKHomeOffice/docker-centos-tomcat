@@ -38,7 +38,7 @@ RUN tar zxf openssl.tar.gz && \
 
 ENV JAVA_HOME /usr/lib/jvm/java-${JAVA_MAJOR}-openjdk-${JAVA_MAJOR}.${JAVA_MINOR}.el7_2.x86_64
 ENV JRE_HOME /usr/lib/jvm/java-${JAVA_MAJOR}-openjdk-${JAVA_MAJOR}.${JAVA_MINOR}.el7_2.x86_64
-ENV PATH /opt/tomcat/bin:/usr/lib/jvm/jre-${JAVA_MAJOR}-openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV PATH /srv/bin:/opt/tomcat/bin:/usr/lib/jvm/jre-${JAVA_MAJOR}-openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ENV CATALINA_HOME /opt/tomcat
 WORKDIR /opt/tomcat
  
@@ -67,7 +67,12 @@ RUN set -e \
 RUN yum remove -y apr-devel && \
     yum groupremove -y "Development Tools" && \
     yum clean all
-    
-EXPOSE 8080
 
-ENTRYPOINT catalina.sh run
+RUN mkdir -p /opt/tomcat/ssl /srv/bin
+COPY ssl/* /opt/tomcat/ssl/
+COPY etc/* /opt/tomcat/conf/
+COPY bin/* /srv/bin
+
+EXPOSE 8080 8443
+
+ENTRYPOINT docker-entrypoint.sh
