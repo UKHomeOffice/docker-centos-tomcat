@@ -70,7 +70,7 @@ RUN yum remove -y apr-devel kernel-devel kernel-headers boost* rsync perl* && \
     yum groupremove -y "Development Tools" && \
     yum clean all
 
-RUN mkdir -p /opt/tomcat/ssl /srv/bin
+RUN mkdir -p /opt/tomcat/ssl /opt/tomcat/users /srv/bin
 COPY ssl/* /opt/tomcat/ssl/
 COPY etc/* /opt/tomcat/conf/
 COPY bin/* /srv/bin
